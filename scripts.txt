@@ -1,0 +1,9 @@
+#create-stack
+aws cloudformation create-stack --stack-name myteststack --template-body file://./createEc2_CFT.template --parameters ParameterKey=KeyName,ParameterValue=testkey ParameterKey=InstanceType,ParameterValue=t2.micro
+
+#aws cloudformation delete-stack
+
+#get ece2 public ip address
+aws ec2 describe-instances --query "Reservations[*].Instances[*].PublicIpAddress" --output=text
+
+
