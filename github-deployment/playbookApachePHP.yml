@@ -10,7 +10,11 @@
             become: yes
 
         -   name: get php/html from git
-            action: src=/root/files/files/index.php desc=/var/www/html/index.php
+     #       action: shell sudo wget https://raw.githubusercontent.com/vontlin/flux7test/master/index.php
+     #       action: src=/root/files/files/index.php desc=/var/www/html/index.
+            get_url: url="https://raw.githubusercontent.com/vontlin/flux7test/master/index.php" dest=/var/www/html/index.php
+            become: yes
+
 
         -   name: start apache
             service:
