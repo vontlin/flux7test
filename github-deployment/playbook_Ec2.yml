@@ -1,0 +1,51 @@
+- name: ec2 launcher
+  hosts: localhost 
+  #ansible_connection=local ansible_python_interpreter=python
+  connection: local
+  gather_facts: False
+  
+  
+  vars:
+    security_group_name: "sg_webserver"
+    ec2_results: "ec2"
+    tag_id: "flux7Test"
+  
+
+  tasks:
+  - name: create secruity group with port 80
+    # create security group
+    ec2_group:
+      description: sg with rule descriptions
+      name: "{{ security_group_name }}"
+      tags: 
+        Name: "{{ tag_id }}" 
+    #   vpc_id: default
+    #   region: us-east-1
+      rules:
+      - proto: tcp
+        ports: 
+        - 80
+        - 22
+        cidr_ip: 0.0.0.0/0
+        rule_desc: allow all on port 80 (http) and 22 (ssh) 
+    register: security_group_results
+  
+  - name: launching ec2
+    ec2:
+        instance_type: t2.micro
+        key_name: testkey
+        image: ami-0dacb0c129b49f529
+        region: us-east-2
+        count: 1
+        vpc_subnet_id: subnet-2b658640
+        group: "{{ security_group_name }}"
+        assign_public_ip: yes
+        instance_tags:  
+          Name: "{{ tag_id }}"
+        wait: yes
+    register: ec2_results
+
+  - name: print out new vpc, subnet id, and security group for vpc
+        # print out new subnet id and security group
+    debug:
+        msg: "security group: {{ security_group_results.group_id }} and {{ec2_results }}"

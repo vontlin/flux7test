@@ -1,18 +1,44 @@
 ---
--   hosts: aws
+-   hosts: webservers
     tasks:
-#        -   name: Copy repo file
-#            copy: src=/etc/yum/repos.d/rhel.repo dest=/etc/yum.repos.d/rhel.repo
         -   name: Install httpd
-            action: yum name=httpd state=installed
-        -   name: get php/html from git
-            action: src=/root/files/files/index.php desc=/var/www/html/index.php
+            action: yum name=httpd state=installed 
+            become: yes
+                
+        # -   name: get php/html from git
+        #     action: src=/root/files/files/index.php desc=/var/www/html/index.php
         -   name: start apache
             service:
                 name: httpd
                 state: started
+            become: yes
         -   name: Install php
             action: yum name=php state=installed
+            become: yes
+
+
+
+
+
+
+
+
+
+
+
+
+#        -   name: Copy repo file
+#            copy: src=/etc/yum/repos.d/rhel.repo dest=/etc/yum.repos.d/rhel.repo
+
+
+
+
+
+
+
+
+
+
 #        -   name: Install php-mysql
 #            action: yum name=php-mysql state=installed
 #        -   name: Install php-fpm

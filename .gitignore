@@ -2,3 +2,8 @@
 testkey.pem
 testkey.ppk
 github-deployment/.boto
+github-deployment/testkey1.pem
+github-deployment/drsti_accessKeys.csv
+github-deployment/hosts
+github-deployment/ansible.cfg
+xxx
