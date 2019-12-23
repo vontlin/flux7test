@@ -13,6 +13,20 @@
             get_url: url="https://raw.githubusercontent.com/vontlin/flux7test/master/github-deployment/index.php" dest=/var/www/html/index.php
             become: yes
 
+        # -   name: get php/html from git
+        #     get_url: url="https://raw.githubusercontent.com/vontlin/flux7test/master/github-deployment/testPHPinfo.php" dest=/var/www/html/testPHPinfo.php
+        #     become: yes
+
+
+
+        - name: Enable PHP in Apache
+          apache2_module: 
+            state: present 
+            name: php5
+            # notify: restart webserver
+            # when: php_enable_webserver
+
+
         -   name: start apache
             service:
                 name: httpd
@@ -21,12 +35,10 @@
             become: yes
 
 
-
-
-
-
-
-
+        # - name: restart Apache service
+        #     service:
+        #         name: httpd
+        #         state: restarted
 
 
 
