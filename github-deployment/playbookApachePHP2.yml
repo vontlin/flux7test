@@ -1,24 +1,22 @@
 ---
 -   hosts: tag_Name_flux7Test
     tasks:
-        -   name: Install httpd
-            action: yum name=httpd state=present 
+        -   name: Install apache2
+            apt: name=apache2 state=present 
             become: yes
 
         -   name: Install php
-            action: yum name=php state=present
+            apt: name=libapache2 state=present
+            become: yes
+
+        -   name: start apache
+            service: name=apache2 state=running enabled=yes
             become: yes
 
         -   name: get php/html from git
             get_url: url="https://raw.githubusercontent.com/vontlin/flux7test/master/github-deployment/index.php" dest=/var/www/html/index.php
             become: yes
 
-        -   name: start apache
-            service:
-                name: httpd
-                state: started
-                enabled: yes
-            become: yes
 
 
 
