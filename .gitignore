@@ -7,3 +7,5 @@ github-deployment/drsti_accessKeys.csv
 github-deployment/hosts
 github-deployment/ansible.cfg
 xxx
+ansible.cfg
+hosts
