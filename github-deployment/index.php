@@ -1,9 +1,9 @@
 
 <html>
  <head>
-  <title>PHP Test</title>
+  <title>Flux 7 Test</title>
  </head>
  <body>
- <?php echo '<p>welcome to Flux7 </p>'; ?> 
+ <?php echo '<p>welcome to Flux7 </p>' ?> 
  </body>
 </html>
